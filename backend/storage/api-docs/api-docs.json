@@ -1,0 +1,48 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Deppes Library API",
+        "description": "API for book management.",
+        "contact": {
+            "name": "Victor Lucas Rodrigues",
+            "email": "Imagine an email"
+        },
+        "license": {
+            "name": "MIT License",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "api/books": {
+            "post": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Create new book.",
+                "description": "This route is used to create a new book.",
+                "operationId": "abd95026442c01989050f79236bd93ba",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {}
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Book created successfully."
+                    },
+                    "500": {
+                        "description": "Internal error server"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Books",
+            "description": "Books"
+        }
+    ]
+}

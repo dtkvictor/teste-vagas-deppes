@@ -1,0 +1,18 @@
+openapi: 3.0.0
+info:
+  title: Deppes Library API
+  version: 1.0.0
+  description: API for book management.
+  contact:
+    email: dtkvictor32@gmail.com
+    name: Victor Lucas Rodrigues
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+
+paths:
+  /api/books:
+    $ref: './books.yaml#/paths/books'
+
+components:
+  $ref: './schemas.yaml/components'

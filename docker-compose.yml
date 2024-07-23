@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  backend:
+    depends_on:
+      - database
+    build: ./backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/var/www/html
+    command: sh -c "composer install; php artisan migrate; php artisan serve --host=0.0.0.0 --port=8080"
+  
+  frontend: 
+    depends_on:
+      - backend
+    image: node:20.12.2-alpine3.19
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./frontend:/app
+    command: sh -c "mkdir app; cd /app; npm install; npm run dev -- --port 8888 --host"
+
+  database:
+    image: postgres:14
+    container_name: postgres
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: laravel
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: library
+    volumes:
+      - ./database:/var/lib/postgresql/data
