@@ -10,10 +10,10 @@ use App\Http\Controllers\AuthController,
 use App\Http\Middleware\UnauthMiddleware;
 use Illuminate\Support\Facades\Route;
 
+use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
-Route::get('sanctum/csrf-cookie', function () {
-    return redirect()->to('/sanctum/csrf-cookie');
-});
+
+Route::get('sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
 
 Route::post('auth/login', [AuthController::class, 'login'])->middleware(UnauthMiddleware::class);
 Route::post('auth/register', [AuthController::class, 'register'])->middleware(UnauthMiddleware::class);
@@ -37,6 +37,6 @@ Route::middleware('auth:sanctum')->group(function()
     Route::post('bookcase/update/{id}', [BookController::class, 'update'])->where('id', '[0-9]+');
     Route::post('bookcase/delete/{id}', [BookController::class, 'delete'])->where('id', '[0-9]+');
 
-    //Route::apiResource('categories', CategoryController::class)->except(['index', 'show']);
-    //Route::apiResource('publishers', PublisherController::class)->except(['index', 'show']);
+    Route::apiResource('categories', CategoryController::class)->except(['index', 'show']);
+    Route::apiResource('publishers', PublisherController::class)->except(['index', 'show']);    
 });
